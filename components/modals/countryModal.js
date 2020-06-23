@@ -1,25 +1,42 @@
-import React from 'react'
-import { StyleSheet, Text, View, Modal } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { StyleSheet, Text, View, Modal, FlatList, TouchableOpacity, Image } from 'react-native'
 import {SimpleLineIcons} from '@expo/vector-icons'
+import {request} from 'graphql-request'
 
-const CountryModal = ({CountryList, setCountryList}) => {
-    
+const query = `{
+    countries {
+        country
+        countryInfo{ 
+            flag
+        }
+    }
+}`
+
+const CountryModal = ({CountryOptions, setCountryOptions, setCountryVisited}) => {
+    const [Countries, setCountries] = useState([])
+    useEffect(() => {
+        request('https://covid19-graphql.netlify.app/', query)
+        .then((data)=>{
+           setCountries(data.countries)
+        })
+        .catch((err)=>{console.log(err)})
+    }, [])
     
     return (
-        <Modal visible={CountryList} >
+        <Modal visible={CountryOptions} >
              <View style={{flex:0.5, padding:10, alignItems:'flex-end',paddingHorizontal:20}}>
                 <SimpleLineIcons name='close' size={25} 
-                                onPress={()=>{setCountryList(false)}} />
+                                onPress={()=>{setCountryOptions(false)}} />
             </View>
-            {/*
+            
             <View style={{flex:11}}>
                 <FlatList 
                     keyExtractor={(item)=>item.country}
-                    data={data}
+                    data={Countries}
                     renderItem={({item})=>(
                         <TouchableOpacity onPress={()=>{
-                            updateCountry(item.country)
-                            setShowModal(false)
+                            setCountryVisited(item.country)
+                            setCountryOptions(false)
                         }}>
                             <View style={styles.ImageSection}>
                                 <Image source={{uri:item.countryInfo.flag}} style={styles.Image} />
@@ -28,9 +45,7 @@ const CountryModal = ({CountryList, setCountryList}) => {
                         </TouchableOpacity>
                     )}
                 />
-            </View> */}
-            <Text>countries</Text>
-    
+            </View>
     </Modal>
     )
 }

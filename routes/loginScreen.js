@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground } 
 
 const LoginScreen = () => {
     return (
-        <View style={styles.container}>
+        <View style={{flex:1}}>
             <ImageBackground source={require('../assets/covid.jpg')} style={styles.ImageBackground} >
-                <View style={{flex:1, backgroundColor:'rgba(0,0,0,.6)'}}>
+                <View style={styles.darken}>
                     <Text style={styles.title}>COVERS</Text>
                     <Text style={{color:'white',fontSize:15, fontWeight:'bold'}}>(COVID-19 EMERGENCY RESPONSE SOLUTION)</Text>
                     <Text style={{color:'white'}}>
@@ -28,19 +28,22 @@ const LoginScreen = () => {
 export default LoginScreen
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1 
+    darken:{
+        flex:1,
+        backgroundColor:'rgba(0,0,0,.3)',
+        paddingHorizontal:15,
+        paddingVertical:80 
     },
     ImageBackground:{
         flex:1,
         resizeMode:'cover',
-        paddingHorizontal:15,
-        paddingVertical:70
+       
     },
     TextInput:{
         padding:8,
         backgroundColor:'white',
-        marginBottom:8,
+        marginBottom:10,
+        borderRadius:3
         
     },
     button:{

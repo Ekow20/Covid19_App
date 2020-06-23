@@ -27,7 +27,7 @@ const Home = () => {
         .catch((err)=>{console.log(err)})
     }, [])
     
-    console.log(Updated.slice(0,9))
+    
     return (
         <View style={styles.container}>
             <ScrollView horizontal={true}>
@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
         width:250,
         marginVertical:15,
         marginRight:20,
+        overflow:'hidden',
+        borderRadius:6,
         
     },
     numbers:{
@@ -85,10 +87,10 @@ const styles = StyleSheet.create({
     },
     boldText:{
         fontWeight:'bold',
-        fontSize:15,
+        fontSize:17,
     },
     darken:{
         flex:1,
-        backgroundColor:'rgba(0,0,0,.6)'
+        backgroundColor:'rgba(0,0,0,.4)'
     }
 })

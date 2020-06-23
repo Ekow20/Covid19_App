@@ -2,19 +2,24 @@ import React,{useState} from 'react'
 import { StyleSheet, Text, View, Dimensions,Modal } from 'react-native'
 import {Ionicons, FontAwesome} from '@expo/vector-icons'
 import Profile from './modals/profile'
+import Notification from './modals/notification'
 const { width}= Dimensions.get('window')
 
 const Header = ({route}) => {
     const [OpenProfile, setOpenProfile] = useState(false)
+    const [OpenNotification, setOpenNotification] = useState(false)
     return (
         <View style={{flex:1, width:width-40, paddingTop:10}}>
             <View style={styles.iconSec}>
                 <FontAwesome name='user-circle' size={27} color='grey' onPress={()=>{setOpenProfile(true)}} />
-                <Ionicons name='ios-notifications-outline' size={30} />
+                <Ionicons name='ios-notifications-outline' size={30}  onPress={()=>{setOpenNotification(true)}}/>
             </View>
             <Text style={styles.HeaderText}>{getHeaderTitle(route)}</Text>
             <Modal visible={OpenProfile} animationType='slide' animated={true}>
                 <Profile setOpenProfile={setOpenProfile} />
+            </Modal>
+            <Modal visible={OpenNotification} animationType='slide' animated={true}>
+                <Notification setOpenNotification={setOpenNotification} />
             </Modal>
         </View>
     )
