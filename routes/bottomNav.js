@@ -16,7 +16,7 @@ const BottomNav = () => {
                     }
             )}
                 tabBarOptions={{activeTintColor:'black'}}
-                initialRouteName='Report'
+                initialRouteName='Home'
             >
                 <Tab.Screen name='Home' component={Home} />
                 <Tab.Screen name='Report' component={Report}/>

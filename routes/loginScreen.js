@@ -1,7 +1,18 @@
-import React from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native'
+import React,{useState} from 'react'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground, } from 'react-native'
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
+    const [PhoneNo, setPhoneNo] = useState('0558691496')
+    const [Pin, setPin] = useState('')
+
+    const login =()=>{
+        if(PhoneNo==='0558691496' && Pin==='12345'){
+            navigation.navigate('Home')
+        }else{
+            alert('Invalid Pin or Phone number. Try Again')
+        }
+    }
+
     return (
         <View style={{flex:1}}>
             <ImageBackground source={require('../assets/covid.jpg')} style={styles.ImageBackground} >
@@ -13,9 +24,14 @@ const LoginScreen = () => {
                         and eventually halt the spread of  COVID-19. 
                     </Text>
                     <View style={{marginTop:20}}>
-                        <TextInput style={styles.TextInput} placeholder='Phone Number' keyboardType={'numeric'}/>
-                        <TextInput style={styles.TextInput} placeholder='Pin' keyboardType={'numeric'}/>
-                        <TouchableOpacity style={styles.button}>
+                        <TextInput style={styles.TextInput} placeholder='Phone Number'
+                                    keyboardType={'numeric'} value={PhoneNo}
+                                    onChangeText={(val)=>{setPhoneNo(val)}} />
+                        <TextInput style={styles.TextInput} placeholder='Pin'
+                                    secureTextEntry={true} 
+                                    keyboardType={'numeric'} value={Pin}
+                                    onChangeText={(val)=>{setPin(val)}}/>
+                        <TouchableOpacity style={styles.button} onPress={login}>
                             <Text style={{color:'white'}}>Login</Text>
                         </TouchableOpacity>
                     </View>

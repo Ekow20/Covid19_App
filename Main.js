@@ -14,14 +14,16 @@ const Stack = createStackNavigator()
 const Main = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='Home'>
+            <Stack.Navigator initialRouteName='Login'>
+                <Stack.Screen name='Login' component={LoginScreen}
+                                options={{headerShown:false}}  
+                    />
                 <Stack.Screen name='Home' component={BottomNav} 
                               options ={({route})=> ({headerTitle: ()=><Header route={route}/>,
-                                        headerStyle:{height:100,} 
+                                        headerStyle:{height:100,} ,
+                                        headerLeft: null
                             })}                              
-                />
-                <Stack.Screen name='Login' component={LoginScreen}
-                              options={{headerShown:false}}  
+                            
                 />
                 
             </Stack.Navigator>
